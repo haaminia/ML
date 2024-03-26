@@ -9,7 +9,7 @@ from mmvae.data import MappedCellCensusDataLoader
 
 class VAETrainer:
 
-    def __init__(self, device, model=Arch_Model.VAE(), batch_size=512, learning_rate=0.00001, num_epochs=10, start_kl=0.0, end_kl=0.1, annealing_start=2, annealing_steps=8):
+    def __init__(self, device, model=Arch_Model.VAE(), batch_size=512, learning_rate=0.0001, num_epochs=10, start_kl=0.0, end_kl=0.1, annealing_start=2, annealing_steps=8):
         #Configure
         self.model = model.to(device)
         self.train_loader =  MappedCellCensusDataLoader(
