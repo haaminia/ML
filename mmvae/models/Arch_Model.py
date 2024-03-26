@@ -7,32 +7,32 @@ class VAE(nn.Module):
         super(VAE, self).__init__()
         # Encoder
         self.encoder = nn.Sequential(
-            nn.Linear(60664, 4096),
-            nn.LeakyReLU(),
-            nn.BatchNorm1d(4096, 0.8),
-            nn.Linear(4096, 1200),
-            nn.LeakyReLU(),
-            nn.BatchNorm1d(1200, 0.8),
-            nn.Linear(1200, 400),
+            nn.Linear(60664, 10000),
             nn.ReLU(),
-            nn.BatchNorm1d(400, 0.8)
+            nn.BatchNorm1d(10000, 0.8),
+            nn.Linear(10000, 2000),
+            nn.ReLU(),
+            nn.BatchNorm1d(2000, 0.8),
+            nn.Linear(2000, 330),
+            nn.ReLU(),
+            nn.BatchNorm1d(330, 0.8)
         )
         
-        self.fc_mu = nn.Linear(400, 128)
-        self.fc_var = nn.Linear(400, 128)
+        self.fc_mu = nn.Linear(330, 128)
+        self.fc_var = nn.Linear(330, 128)
         
         # Decoder
         self.decoder = nn.Sequential(
-            nn.Linear(128, 400),
+            nn.Linear(128, 330),
             nn.ReLU(),
-            nn.BatchNorm1d(400, 0.8),
-            nn.Linear(400, 1200),
-            nn.LeakyReLU(),
-            nn.BatchNorm1d(1200, 0.8),
-            nn.Linear(1200, 4096),
-            nn.LeakyReLU(),
-            nn.BatchNorm1d(4096, 0.8),
-            nn.Linear(4096, 60664),
+            nn.BatchNorm1d(330, 0.8),
+            nn.Linear(330, 2000),
+            nn.ReLU(),
+            nn.BatchNorm1d(2000, 0.8),
+            nn.Linear(2000, 10000),
+            nn.ReLU(),
+            nn.BatchNorm1d(10000, 0.8),
+            nn.Linear(10000, 60664),
             nn.Sigmoid(),
         )
 
